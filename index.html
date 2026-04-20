@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
   <title>Phantom · Console Portátil</title>
-  <!-- Fonts & Icons -->
+  <!-- Fonts & Icons (CORRIGIDO - Versão oficial sem conflitos) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <!-- FONT AWESOME CORRETO (substitui o kit problemático) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <style>
@@ -257,13 +258,13 @@
       flex: 1;
       text-align: center;
       position: relative;
+      min-height: 400px; /* GARANTE ALTURA MÍNIMA PARA O MODELO */
     }
 
-    .hero-image img {
-      max-width: 100%;
-      height: auto;
-      filter: drop-shadow(0 30px 30px rgba(0, 0, 0, 0.6));
-      animation: float 5s ease-in-out infinite;
+    #modelViewerContainer {
+      width: 100%;
+      height: 100%;
+      min-height: 400px;
     }
 
     @keyframes float {
@@ -313,7 +314,7 @@
     /* ===== MODELOS (cards) ===== */
     .models-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr); /* ajustado para 2 cards */
+      grid-template-columns: repeat(2, 1fr);
       gap: 30px;
       justify-content: center;
     }
@@ -668,7 +669,7 @@
           É PHANTOM.
         </h1>
         <p class="hero-desc">
-          Console portátil retrô com tecnologia atual, tela de 7" e até 6h de bateria.
+          Console portátil retrô com tecnologia atual, tela LCD de 5" e até 6h de bateria.
         </p>
         <div class="price-tag">
           <span class="price">R$ 350,00 à vista</span>
@@ -680,8 +681,8 @@
         </div>
       </div>
       <div class="hero-image">
-        <!-- Substituído por um placeholder para modelo interativo -->
-        <div id="modelViewerContainer" style="width:100%; height:400px;"></div>
+        <!-- Contêiner do Modelo 3D -->
+        <div id="modelViewerContainer"></div>
       </div>
     </div>
   </section>
@@ -698,13 +699,13 @@
         </div>
         <div class="feature-card">
           <div class="feature-icon"><i class="fas fa-tv"></i></div>
-          <h3>Tela LCD 7" HDMI</h3>
-          <p>Imersão total com HDR, brilho de 1000 nits e resposta ultra-rápida.</p>
+          <h3>Tela LCD 5"</h3>
+          <p>Tela LCD de 5” com cores vibrantes, alto brilho e resposta ágil, perfeita para extrair o máximo do nosso Processador BCM2837.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon"><i class="fas fa-battery-full"></i></div>
           <h3>Até 6h de jogo</h3>
-          <p>Bateria de longa duração com carregamento rápido USB-C.</p>
+          <p>Energia otimizada com recarga prática via USB-C..</p>
         </div>
       </div>
     </div>
@@ -715,10 +716,10 @@
     <div class="container">
       <h2>Escolha seu Phantom</h2>
       <div class="models-grid">
-        <!-- Modelo Phantom (padrão) -->
+        <!-- Modelo Phantom Lite -->
         <div class="model-card">
           <div style="position: relative;">
-            <img class="model-img" src="WhatsApp Image 2026-04-17 at 21.17.15.jpeg" alt="Phantom Lite">
+            <img class="model-img" src="WhatsApp Image 2026-04-20 at 19.44.38.jpeg" alt="Phantom Lite">
           </div>
           <div class="model-content">
             <h3 class="model-name">Phantom Lite</h3>
@@ -731,10 +732,10 @@
             </div>
           </div>
         </div>
-        <!-- Modelo Phantom Gold (indisponível) -->
+        <!-- Modelo Phantom Silver -->
         <div class="model-card">
           <div style="position: relative;">
-            <img class="model-img" src="WhatsApp Image 2026-04-17 at 20.29.04 (1).jpeg" alt="Phantom Silver">
+            <img class="model-img" src="WhatsApp Image 2026-04-20 at 19.44.49.jpeg" alt="Phantom Silver">
           </div>
           <div class="model-content">
             <h3 class="model-name">Phantom Silver</h3>
@@ -752,18 +753,43 @@
   </section>
 
   <!-- GALERIA -->
-  <section id="galeria">
-    <div class="container">
-      <h2>Design Destaque</h2>
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <img src="WhatsApp Image 2026-04-17 at 21.17.15.jpeg" alt="Versão do console Phantom">
-        </div>
-      <p style="text-align: center; margin-top: 30px; color: var(--text-muted);">
-        <i class="fas fa-camera"></i> Console desenvolvido para melhor conforto e entretenimento possível.
-      </p>
+<section id="galeria">
+  <div class="container">
+    <h2>Design Destaque</h2>
+    <div class="gallery-grid">
+      <!-- Substituindo a primeira imagem por um modelo 3D -->
+      <div class="gallery-item" style="background: #0b0d10;">
+        <model-viewer 
+          id="gallery-model-viewer"
+          src="base.glb"
+          alt="Modelo 3D do Console Phantom"
+          auto-rotate
+          camera-controls
+          ar
+          shadow-intensity="1"
+          camera-orbit="0deg 75deg 2m"
+          style="width: 100%; height: 280px; background: #0b0d10;"
+        ></model-viewer>
+      </div>
+      <div class="gallery-item">
+        <model-viewer 
+          id="gallery-model-viewer"
+          src="phantom_chrome.glb"
+          alt="Modelo 3D do Console Phantom"
+          auto-rotate
+          camera-controls
+          ar
+          shadow-intensity="1"
+          camera-orbit="0deg 75deg 2m"
+          style="width: 100%; height: 280px; background: #0b0d10;"
+        ></model-viewer>
+      </div>
     </div>
-  </section>
+    <p style="text-align: center; margin-top: 30px; color: var(--text-muted);">
+      <i class="fas fa-camera"></i> Console desenvolvido para melhor conforto e entretenimento possível.
+    </p>
+  </div>
+</section>
 
   <!-- ESPECIFICAÇÕES TÉCNICAS -->
   <section id="especificacoes">
@@ -777,7 +803,7 @@
           <li><span class="spec-label">Armazenamento</span><span class="spec-value">32GB</span></li>
         </ul>
         <ul class="specs-list">
-          <li><span class="spec-label">Tela</span><span class="spec-value">Tela LCD 7” HDMI</span></li>
+          <li><span class="spec-label">Tela</span><span class="spec-value">Tela LCD 5”</span></li>
           <li><span class="spec-label">Bateria</span><span class="spec-value">3x18650 5V 2A, até 6h</span></li>
           <li><span class="spec-label">Conectividade</span><span class="spec-value">Wi-Fi 6E, Bluetooth 5.3, USB-C</span></li>
           <li><span class="spec-label">Áudio</span><span class="spec-value">Stereo, suporte a áudio de jogos 3D</span></li>
@@ -792,7 +818,7 @@
       <div class="cta-section">
         <i class="fas fa-headset" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
         <h3 class="cta-title">Deseja mais informações?</h3>
-        <p style="font-size: 1.2rem; margin-bottom: 16px; color: #ccc;">Fale direto com nossa equipe de vendas OU entre na nossa comunidade para tire dúvidas.</p>
+        <p style="font-size: 1.2rem; margin-bottom: 16px; color: #ccc;">Fale direto com nossa equipe de vendas OU entre na nossa comunidade para tirar dúvidas.</p>
         <a href="https://chat.whatsapp.com/D1POPuDCLEm2hJSrP2LtKJ" class="btn whatsapp-btn" target="_blank" rel="noopener">
           <i class="fab fa-whatsapp"></i> Entrar na comunidade no WhatsApp
         </a>
@@ -810,14 +836,13 @@
       <span>© 2026 Spectro Productions. Todos os direitos reservados.</span>
     </div>
     <div class="social-icons">
-     <a href="https://x.com/spectroprodtail" aria-label="X (Twitter)"><i class="fab fa-twitter"></i></a>
-      <a href="https://chat.whatsapp.com/D1POPuDCLEm2hJSrP2LtKJ" aria-label="YouTube"><i class="fab fa-whatsapp"></i></a>
-      <a href="https://discord.com/channels/1461052124837449937/1461416980257968253" aria-label="Discord"><i class="fab fa-discord"></i></a>
+      <a href="https://x.com/spectroprodtail" aria-label="X (Twitter)"><i class="fab fa-twitter"></i></a>
+      <a href="https://chat.whatsapp.com/D1POPuDCLEm2hJSrP2LtKJ" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
     </div>
   </div>
 </footer>
 
-<!-- MODAL DE PRÉ-CONTATO (FORMULÁRIO) -->
+<!-- MODAL DE PRÉ-CONTATO -->
 <div class="modal-overlay" id="contactModal">
   <div class="modal-card">
     <div class="modal-header">
@@ -851,8 +876,10 @@
   </div>
 </div>
 
-<!-- JAVASCRIPT -->
-<script src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+<!-- SCRIPTS -->
+<!-- Model Viewer Library -->
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+
 <script>
   (function() {
     "use strict";
@@ -924,15 +951,19 @@
     const modelViewerContainer = document.getElementById('modelViewerContainer');
     if (modelViewerContainer) {
       const modelViewer = document.createElement('model-viewer');
-      modelViewer.setAttribute('src', 'path/to/your/model.glb'); // Substitua pelo caminho real do seu modelo 3D
+      // Usando um modelo de exemplo GRATUITO da Google para TESTE
+      // Substitua pelo seu arquivo .glb quando estiver pronto
+      modelViewer.setAttribute('src', 'phantom_chrome.glb');
       modelViewer.setAttribute('alt', 'Modelo 3D interativo do Console Phantom');
       modelViewer.setAttribute('auto-rotate', '');
       modelViewer.setAttribute('camera-controls', '');
-      modelViewer.setAttribute('ar', ''); // Habilita AR se suportado
+      modelViewer.setAttribute('ar', '');
       modelViewer.setAttribute('shadow-intensity', '1');
+      modelViewer.setAttribute('camera-orbit', '0deg 75deg 105%');
       modelViewer.style.width = '100%';
       modelViewer.style.height = '100%';
-      modelViewer.style.borderRadius = '20px'; // Adiciona um pequeno arredondamento para combinar com o design
+      modelViewer.style.minHeight = '400px';
+      modelViewer.style.borderRadius = '20px';
       modelViewerContainer.appendChild(modelViewer);
     }
 
@@ -977,7 +1008,7 @@
       e.target.value = value;
     });
 
-    // Botões "Comprar" (apenas os habilitados)
+    // Botões "Comprar"
     const buyButtons = document.querySelectorAll('.model-actions .btn-comprar:not(.disabled)');
     buyButtons.forEach(btn => {
       btn.addEventListener('click', (e) => {
@@ -1001,7 +1032,7 @@
         return;
       }
 
-      const phone = '5582991194273'; // Substitua pelo número de telefone desejado
+      const phone = '5582991194273';
       const texto = 
         `Olá! Tenho interesse no *${currentModel}*.%0A%0A` +
         `📌 *Nome:* ${encodeURIComponent(name)}%0A` +
@@ -1013,11 +1044,10 @@
       closeModal();
     });
 
-    // Botões "Detalhes" (apenas demonstração)
+    // Botões "Detalhes"
     const detailBtns = document.querySelectorAll('.model-actions .btn-outline');
     detailBtns.forEach(btn => {
       btn.addEventListener('click', (e) => {
-        // Verifica se o link é um placeholder '#'
         if (btn.getAttribute('href') === '#') {
           e.preventDefault();
           const modelName = btn.closest('.model-content')?.querySelector('.model-name')?.innerText || 'Phantom';
